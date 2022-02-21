@@ -18,4 +18,6 @@ Snapshot:
   * In this project, design agents for the classic version of Pacman, including ghosts.
   * Implement minimax, expectimax search and design the evaluation function.
 
+Snapshot:
 
+![P1](https://user-images.githubusercontent.com/44472968/155034034-2c6822c2-9e0f-4b10-a789-918f5bf26209.png)
