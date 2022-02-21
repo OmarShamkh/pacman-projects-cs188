@@ -13,6 +13,8 @@
 
 
 # imports from python standard library
+import pprint
+import py_compile
 import grading
 import imp
 import optparse
@@ -28,6 +30,8 @@ except:
     pass
 
 # register arguments and set default values
+
+
 def readCommand(argv):
     parser = optparse.OptionParser(
         description='Run public tests on student code')
@@ -134,9 +138,6 @@ def loadModuleString(moduleSource):
     return tmp
 
 
-import py_compile
-
-
 def loadModuleFile(moduleName, filePath):
     with open(filePath, 'r') as f:
         return imp.load_module(moduleName, f, "%s.py" % moduleName, (".py", "r", imp.PY_SOURCE))
@@ -172,12 +173,9 @@ ERROR_HINT_MAP = {
         a line of code assuming that the state is (x, y) and we run your code
         on a state space with (x, y, z), this error could be thrown. Try
         making your code more general and submit again!
-
     """
     }
 }
-
-import pprint
 
 
 def splitStrings(d):
@@ -238,6 +236,8 @@ def getDepends(testParser, testRoot, question):
     return allDeps
 
 # get list of questions to grade
+
+
 def getTestSubdirs(testParser, testRoot, questionToGrade):
     problemDict = testParser.TestParser(
         os.path.join(testRoot, 'CONFIG')).parse()

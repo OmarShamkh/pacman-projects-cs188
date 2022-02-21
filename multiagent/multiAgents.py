@@ -19,11 +19,8 @@ import util
 from game import Agent
 
 # Returns the Euclidean distance between two points
-
-
 def euclideanDistance(point1, point2):
     return (abs(point1[0] - point2[0])**2 + abs(point1[1] - point2[1])**2)**0.5
-
 
 class ReflexAgent(Agent):
     """
@@ -240,7 +237,63 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         Returns the minimax action using self.depth and self.evaluationFunction
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        legal_actions = gameState.getLegalActions(0)
+        max_val = -9999999
+        ans = None
+        alpha = -9999999
+        beta = 9999999
+
+        for action in legal_actions:
+            current_successor = gameState.generateSuccessor(0, action)
+            action_value = self.getvalue(current_successor, 1, 0, alpha, beta)
+
+            if action_value > max_val:
+                max_val = action_value
+                alpha = action_value
+                ans = action
+
+        return ans
+
+    def Maximizer(self, gameState, agent, depth, alpha, beta):
+        legal_actions = gameState.getLegalActions(agent)
+        maxi = -9999999
+        for action in legal_actions:
+            current_successor = gameState.generateSuccessor(agent, action)
+            maxi = max(maxi, self.getvalue(current_successor, 1, depth, alpha, beta))
+            if maxi > beta:
+                return maxi
+            alpha = max(alpha , maxi)
+
+        return maxi
+
+    def Minimizer(self, gameState, agent, depth, alpha, beta):
+        legal_actions = gameState.getLegalActions(agent)
+        mini = 9999999
+        for action in legal_actions:
+            current_successor = gameState.generateSuccessor(agent, action)
+            if agent + 1 == gameState.getNumAgents():
+                mini = min(mini, self.getvalue(current_successor, 0, depth + 1 , alpha, beta))
+            else:
+                mini = min(mini, self.getvalue(current_successor, agent + 1, depth, alpha, beta))
+            if mini < alpha:
+                return mini
+            beta = min(beta , mini)
+            
+        return mini
+
+    def getvalue(self, gameState, agent, depth, alpha , beta):
+        # complete
+        if depth == self.depth or gameState.isWin() or gameState.isLose():
+            return self.evaluationFunction(gameState)
+
+        # If agent is 0, Maximizer
+        if agent == 0:
+            return self.Maximizer(gameState, agent, depth, alpha , beta)
+
+        # if agentindex > 0, Minimizer
+        if agent > 0:
+            return self.Minimizer(gameState, agent, depth, alpha, beta)
 
 
 class ExpectimaxAgent(MultiAgentSearchAgent):

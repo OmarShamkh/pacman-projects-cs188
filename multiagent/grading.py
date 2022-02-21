@@ -105,10 +105,8 @@ class Grades:
               (self.points.totalCount(), sum(self.maxes.values())))
         if bonusPic and self.points.totalCount() == 25:
             print("""
-
                      ALL HAIL GRANDPAC.
               LONG LIVE THE GHOSTBUSTING KING.
-
                   ---      ----      ---
                   |  \    /  + \    /  |
                   | + \--/      \--/ + |
@@ -134,7 +132,6 @@ class Grades:
               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 @@@@@@@@@@@@@@@@@@@@@@@@@@
                     @@@@@@@@@@@@@@@@@@
-
 """)
         print("""
 Your grades are NOT yet registered.  To register your grades, make sure
@@ -293,7 +290,7 @@ to follow your instructor's guidelines to receive credit on your project.
 
     def addMessage(self, message, raw=False):
         if not raw:
-                # We assume raw messages, formatted for HTML, are printed separately
+            # We assume raw messages, formatted for HTML, are printed separately
             if self.mute:
                 util.unmutePrint()
             print('*** ' + message)
