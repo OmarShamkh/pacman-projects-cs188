@@ -309,6 +309,53 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
         legal moves.
         """
         "*** YOUR CODE HERE ***"
+        legal_actions = gameState.getLegalActions(0)
+        max_val = -9999999
+        ans = None
+
+        for action in legal_actions:
+            current_successor = gameState.generateSuccessor(0, action)
+            action_value = self.getvalue(current_successor, 1, 0)
+
+            if action_value > max_val:
+                max_val = action_value
+                ans = action
+
+        return ans
+
+    def Maximizer(self, gameState, agent, depth):
+        legal_actions = gameState.getLegalActions(agent)
+        maxi = -9999999
+        for action in legal_actions:
+            current_successor = gameState.generateSuccessor(agent, action)
+            maxi = max(maxi, self.getvalue(current_successor, 1, depth))
+
+        return maxi
+
+    def Exp(self, gameState, agent, depth):
+        legal_actions = gameState.getLegalActions(agent)
+        ans = 0
+        for action in legal_actions:
+            current_successor = gameState.generateSuccessor(agent, action)
+            if agent + 1 == gameState.getNumAgents():
+                ans += self.getvalue(current_successor, 0, depth+1)
+            else:
+                ans += self.getvalue(current_successor, agent + 1, depth)
+
+        return ans/len(legal_actions)
+
+    def getvalue(self, gameState, agent, depth):
+        # complete
+        if depth == self.depth or gameState.isWin() or gameState.isLose():
+            return self.evaluationFunction(gameState)
+
+        # If agent is 0, Maximizer
+        if agent == 0:
+            return self.Maximizer(gameState, agent, depth)
+
+        # if agentindex > 0, Exp
+        if agent > 0:
+            return self.Exp(gameState, agent, depth)
         util.raiseNotDefined()
 
 
@@ -320,6 +367,7 @@ def betterEvaluationFunction(currentGameState):
     DESCRIPTION: <write something here so we know what you did>
     """
     "*** YOUR CODE HERE ***"
+    
     util.raiseNotDefined()
 
 
