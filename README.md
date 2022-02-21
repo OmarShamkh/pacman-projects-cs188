@@ -1,6 +1,8 @@
 # Pacmaaan
-My solutions to the projects of (Intro to AI) CS188 course at the UC Berkeley.
-* Learned search algorithms, reinforcement learning, probabilistic models, bayes nets and machine learning.
+My solutions to the projects of (Intro to AI) CS188 course at the UC Berkeley. Learned search algorithms, reinforcement learning, probabilistic models, bayes nets and machine learning.
+
+Files edited by me is marked by 
+#### "*** YOUR CODE HERE ***"
 
 ## Project 1 Search:
   * In this project, Pacman agent will find paths through his maze world, both to reach a particular location and to collect food efficiently.
