@@ -13,12 +13,11 @@
 
 
 # imports from python standard library
-import pprint
-import py_compile
 import grading
 import imp
 import optparse
 import os
+import pprint
 import re
 import sys
 import projectParams
@@ -30,8 +29,6 @@ except:
     pass
 
 # register arguments and set default values
-
-
 def readCommand(argv):
     parser = optparse.OptionParser(
         description='Run public tests on student code')
@@ -173,6 +170,7 @@ ERROR_HINT_MAP = {
         a line of code assuming that the state is (x, y) and we run your code
         on a state space with (x, y, z), this error could be thrown. Try
         making your code more general and submit again!
+
     """
     }
 }
@@ -236,8 +234,6 @@ def getDepends(testParser, testRoot, question):
     return allDeps
 
 # get list of questions to grade
-
-
 def getTestSubdirs(testParser, testRoot, questionToGrade):
     problemDict = testParser.TestParser(
         os.path.join(testRoot, 'CONFIG')).parse()
@@ -343,12 +339,6 @@ if __name__ == '__main__':
     if options.generateSolutions:
         confirmGenerate()
     codePaths = options.studentCode.split(',')
-    # moduleCodeDict = {}
-    # for cp in codePaths:
-    #     moduleName = re.match('.*?([^/]*)\.py', cp).group(1)
-    #     moduleCodeDict[moduleName] = readFile(cp, root=options.codeRoot)
-    # moduleCodeDict['projectTestClasses'] = readFile(options.testCaseCode, root=options.codeRoot)
-    # moduleDict = loadModuleDict(moduleCodeDict)
 
     moduleDict = {}
     for cp in codePaths:
